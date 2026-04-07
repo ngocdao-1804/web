@@ -1,63 +1,42 @@
 const stories = [
   {
-    id: 1,
-    title: "Truyện 1: Khu rừng bí ẩn",
-    content: "Ngày xưa, trong một khu rừng sâu..."
+    title: "Truyện 1",
+    content: "Nội dung truyện 1..."
   },
   {
-    id: 2,
-    title: "Truyện 2: Thành phố ánh sáng",
-    content: "Một thành phố nơi ánh sáng không bao giờ tắt..."
-  },
-  {
-    id: 3,
-    title: "Truyện 3: Người du hành thời gian",
-    content: "Anh ta có thể quay về quá khứ..."
+    title: "Truyện 2",
+    content: "Nội dung truyện 2..."
   }
 ];
 
 const bookList = document.getElementById("book-list");
 
-// Hàm render
-function renderList(data) {
+// render
+function renderList() {
   bookList.innerHTML = "";
 
-  data.forEach(story => {
+  stories.forEach(story => {
     const div = document.createElement("div");
     div.className = "book";
     div.innerText = story.title;
 
-    div.onclick = () => openStory(story);
+    div.onclick = () => {
+      document.getElementById("book-list").style.display = "none";
+      document.getElementById("reader").classList.remove("hidden");
+
+      document.getElementById("story-title").innerText = story.title;
+      document.getElementById("story-content").innerText = story.content;
+    };
 
     bookList.appendChild(div);
   });
 }
 
-// Hiển thị ban đầu
-renderList(stories);
+// chạy
+renderList();
 
-// Tìm kiếm
-function searchStory() {
-  const keyword = document.getElementById("search").value.toLowerCase();
-
-  const filtered = stories.filter(story =>
-    story.title.toLowerCase().includes(keyword)
-  );
-
-  renderList(filtered);
-}
-
-// Mở truyện
-function openStory(story) {
-  document.getElementById("book-list").classList.add("hidden");
-  document.getElementById("reader").classList.remove("hidden");
-
-  document.getElementById("story-title").innerText = story.title;
-  document.getElementById("story-content").innerText = story.content;
-}
-
-// Quay lại
+// back
 function goBack() {
-  document.getElementById("book-list").classList.remove("hidden");
+  document.getElementById("book-list").style.display = "block";
   document.getElementById("reader").classList.add("hidden");
 }
