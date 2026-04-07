@@ -16,17 +16,18 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const bookList = document.getElementById("book-list");
+  const searchInput = document.getElementById("search");
 
-  function renderList() {
+  function renderList(filteredStories = stories) {
     bookList.innerHTML = "";
 
-    stories.forEach(story => {
+    filteredStories.forEach(story => {
       const div = document.createElement("div");
       div.className = "book";
       div.innerText = story.title;
 
       div.onclick = () => {
-        document.getElementById("book-list").style.display = "none";
+        bookList.style.display = "none";
         document.getElementById("reader").classList.remove("hidden");
 
         document.getElementById("story-title").innerText = story.title;
@@ -36,6 +37,17 @@ document.addEventListener("DOMContentLoaded", () => {
       bookList.appendChild(div);
     });
   }
+
+  window.searchStory = function() {
+    const query = searchInput.value.trim().toLowerCase();
+    const filteredStories = stories.filter(story => story.title.toLowerCase().includes(query));
+    renderList(filteredStories);
+  };
+
+  window.goBack = function() {
+    document.getElementById("reader").classList.add("hidden");
+    bookList.style.display = "grid";
+  };
 
   renderList();
 
