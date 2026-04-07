@@ -2,21 +2,30 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Thư viện truyện</title>
+  <title>Thư viện truyện VSS</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <h1>📚 Thư viện truyện</h1>
 
-  <!-- THÊM CÁI NÀY (bạn đang thiếu khả năng cao) -->
-  <div id="book-list"></div>
+<input 
+  type="text" 
+  id="search" 
+  placeholder="🔍 Tìm truyện..." 
+  onkeyup="searchStory()"
+/>
 
-  <!-- Reader -->
+<div id="book-list"></div>
+
+
+  <!-- Khu đọc truyện -->
   <div id="reader" class="hidden">
     <button onclick="goBack()">⬅ Quay lại</button>
     <h2 id="story-title"></h2>
     <p id="story-content"></p>
   </div>
 
-  <!-- QUAN T
+  <script src="script.js" defer></script>
+</body>
+</html>
